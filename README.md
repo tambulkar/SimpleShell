@@ -17,27 +17,27 @@ simpsh \
 ```
 This example invocation creates seven file descriptors:
 
-A read only descriptor for the file a, created by the --rdonly option.
+1. A read only descriptor for the file a, created by the --rdonly option.
 
-The read end of the first pipe, created by the first --pipe option.
+2. The read end of the first pipe, created by the first --pipe option.
 
-The write end of the first pipe, also created by the first --pipe option.
+3. The write end of the first pipe, also created by the first --pipe option.
 
-The read end of the second pipe, created by the second --pipe option.
+4. The read end of the second pipe, created by the second --pipe option.
 
-The write end of the second pipe, also created by the second --pipe option.
+5. The write end of the second pipe, also created by the second --pipe option.
 
-A write only descriptor for the file c, created by the first --wronly option as modified by the preceding --creat and --trunc.
+6. A write only descriptor for the file c, created by the first --wronly option as modified by the preceding --creat and --trunc.
 
-A write only, append only descriptor for the file d, created by the --wronly option as modified by the preceding --creat and --append options.
+7. A write only, append only descriptor for the file d, created by the --wronly option as modified by the preceding --creat and --append options.
 
 It then creates three subprocesses:
 
-A subprocess with standard input, output, and error being the file descriptors numbered 3, 5, and 6 above. This subprocess runs the command tr with the two arguments A-Z and a-z.
+1. A subprocess with standard input, output, and error being the file descriptors numbered 3, 5, and 6 above. This subprocess runs the command tr with the two arguments A-Z and a-z.
 
-A subprocess with standard input, standard output, and standard error being the file descriptors numbered 0, 2, and 6 above, respectively. This subprocess runs the command sort with no arguments
+2. A subprocess with standard input, standard output, and standard error being the file descriptors numbered 0, 2, and 6 above, respectively. This subprocess runs the command sort with no arguments
 
-A subprocess with standard input, output, and error being the file descriptors numbered 1, 4, and 6 above. This subprocess runs the command cat with the two arguments b and -.
+3. A subprocess with standard input, output, and error being the file descriptors numbered 1, 4, and 6 above. This subprocess runs the command cat with the two arguments b and -.
 
 It then closes the write ends of the pipes, and waits for all three subprocesses to finish. As each finishes, it outputs "exit N" if it exited with status N or "signal S" if it terminated with signal number S, followed by the command and arguments. The output might look like this:
 
